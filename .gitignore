@@ -1,0 +1,20 @@
+# Obsidian
+.obsidian/
+
+# Build
+build/
+bin/
+obj/
+
+# Ejecutables
+*.exe
+*.out
+
+# Archivos temporales
+*.tmp
+*.swp
+*.swo
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
