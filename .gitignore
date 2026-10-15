@@ -1,5 +1,4 @@
 # Obsidian
-.obsidian/
 
 # Build
 build/
@@ -18,3 +17,17 @@ obj/
 # Sistema operativo
 .DS_Store
 Thumbs.db
+
+# Configuraciones locales de IDE
+.qtcreator/
+*.user
+*.user.*
+
+# Logs del editor
+.vscode/*.log
+
+# Configuración de otros editores no utilizados
+.vscode/
+
+# Estado local del espacio de trabajo de Obsidian
+.obsidian/workspace.json
