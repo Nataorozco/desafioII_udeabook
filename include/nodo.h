@@ -2,6 +2,7 @@
 #define NODO_H
 
 template <typename T>
+// nodo guarda un elemento y la direccion del siguiente nodo
 class Nodo {
 public:
     T dato;
