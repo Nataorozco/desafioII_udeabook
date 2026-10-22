@@ -36,6 +36,7 @@ public:
     int tamano() const {return cantidad; }
     bool estaVacia() const {return cantidad ==0;}
 
+
     // Inserción simple (al final gracias a cola)
     void insertarFinal(const T& d) {
         Nodo<T>* n = new Nodo<T>(d);
@@ -88,8 +89,8 @@ public:
             cabeza = cabeza->siguiente;
             if (cabeza == nullptr) cola = nullptr;
         }else {
-            Nodo<T>* previo = cabeza;
-            for (int k = 0; k < i -1; k++) {
+            Nodo<T>* previo = cabeza; //aqui previo empieza en la cabeza
+            for (int k = 0; k < i -1; k++) { // lo lleva hasta el nodo anterior que se va a eliminar
                 previo = previo->siguiente;
                 if (it) (*it)++;
             }
@@ -98,7 +99,7 @@ public:
             if (borrar == cola) cola = previo;
         }
         delete borrar;
-        cantidad ++;
+        cantidad --;
         return true;
     }
 
@@ -111,6 +112,19 @@ public:
         cola = nullptr;
         cantidad = 0;
     }
+
+    // Recorrido eficiente un cursor que recuerda enb que nodo va
+    // avanza de uno en uno, una sola pasada por lista
+    class Iterador{
+    private:
+        Nodo<T>* actualNodo;
+    public:
+        Iterador(Nodo<T>* n) : actualNodo(n) {}
+        bool haySiguiente() const { return actualNodo != nullptr; }
+        T& actual() const { return actualNodo->dato; }
+        void avanzar() { actualNodo = actualNodo->siguiente; }
+    };
+    Iterador inicio() const { return Iterador (cabeza);}
 
     //memoria de la lista, el objeto lista+ por cada nodo
     size_t memoriaUsada() const {
