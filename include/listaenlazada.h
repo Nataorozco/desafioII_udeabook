@@ -88,8 +88,8 @@ public:
             cabeza = cabeza->siguiente;
             if (cabeza == nullptr) cola = nullptr;
         }else {
-            Nodo<T>* previo = cabeza;
-            for (int k = 0; k < i -1; k++) {
+            Nodo<T>* previo = cabeza; //aqui previo empieza en la cabeza
+            for (int k = 0; k < i -1; k++) { // lo lleva hasta el nodo anterior que se va a eliminar
                 previo = previo->siguiente;
                 if (it) (*it)++;
             }
@@ -98,7 +98,7 @@ public:
             if (borrar == cola) cola = previo;
         }
         delete borrar;
-        cantidad ++;
+        cantidad --;
         return true;
     }
 
@@ -111,6 +111,19 @@ public:
         cola = nullptr;
         cantidad = 0;
     }
+
+    // Recorrido eficiente: un cursor recuerda en qué nodo va
+    // Avanza de uno en uno, en una sola pasada por la lista
+    class Iterador {
+    private:
+        Nodo<T>* actualNodo;
+    public:
+        Iterador(Nodo<T>* n) : actualNodo(n) {}
+        bool haySiguiente() const { return actualNodo != nullptr; }
+        T& actual() const { return actualNodo->dato; }
+        void avanzar() { actualNodo = actualNodo->siguiente; }
+    };
+    Iterador inicio() const { return Iterador(cabeza);}
 
     //memoria de la lista, el objeto lista+ por cada nodo
     size_t memoriaUsada() const {
